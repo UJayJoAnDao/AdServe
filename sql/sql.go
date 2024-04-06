@@ -9,7 +9,7 @@ import (
 	"gorm.io/gorm"
 )
 
-var Connect *gorm.DB
+var Connect *gorm.DB // Connect是一個指向gorm.DB的指針，它將用於與數據庫進行交互。
 
 type Config struct {
 	Host     string `yaml:"host"`
