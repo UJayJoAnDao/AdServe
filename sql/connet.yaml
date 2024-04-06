@@ -1,0 +1,5 @@
+host: 127.0.0.1
+username: root
+password: "Danny125835678"
+dbname: "ad_db"
+port: 3306
