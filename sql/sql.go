@@ -16,13 +16,13 @@ type Config struct {
 	Port     string `yaml:"port"`
 	Username string `yaml:"username"`
 	Password string `yaml:"password"`
-	Name     string `yaml:"name"`
+	DBname     string `yaml:"dbname"`
 }
 
-func (c *Config) getConf() *Config {
+func (c *Config) GetConf() *Config {
 	// 這個函數將讀取config.yaml文件並將其解析為結構體，(c *Config)是一個接收器，它是一個指向Config結構體的指針，這意味著我們可以在函數中修改Config結構體的值。
 	// 讀取YAML文件
-	data, err := os.ReadFile("config.yaml")
+	data, err := os.ReadFile("sql/connet.yaml")
 	if err != nil {
 		fmt.Println("Error reading YAML file:", err)
 	}
@@ -36,11 +36,11 @@ func (c *Config) getConf() *Config {
 	return c
 }
 
-func initDB() (err error) {
+func InitSql() (err error) {
 	var c Config
 
 	//獲取yaml配置引數
-	conf := c.getConf()
+	conf := c.GetConf()
 
 	//將yaml配置引數拼接成連線資料庫的url
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=True&loc=Local",
@@ -48,7 +48,7 @@ func initDB() (err error) {
 		conf.Password,
 		conf.Host,
 		conf.Port,
-		conf.Name,
+		conf.DBname,
 	)
 
 	//連線資料庫

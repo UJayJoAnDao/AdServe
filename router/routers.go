@@ -1,4 +1,4 @@
-package routes
+package router
 
 import (
 	"api/controller"
@@ -14,8 +14,10 @@ func SetRouter() *mux.Router {
 	ad := apiV1.PathPrefix("/ad").Subrouter()
 
 	// 定義路由
-	ad.HandleFunc("/", controller.GetAllHandler).Methods("GET")
-	ad.HandleFunc("/", controller.CreateHandler).Methods("POST")
+	// ad.HandleFunc("/all", controller.GetAllHandler).Methods("GET")
+	ad.HandleFunc("", controller.CreateHandler).Methods("POST")
+	// 路由設定api/v1/ad?offset=1&limit=3&age=26
+	ad.HandleFunc("", controller.SearchAdsHandler).Methods("GET")
 
 	return router
 }
